@@ -1,6 +1,4 @@
-import 'package:mobile_product_1/models/tag_entity.dart';
-
-import 'models/note_entity.dart';
+import 'package:mobile_product_1/models/note_entity.dart';
 import 'models/tag_entity.dart';
 
 // final List<NoteEntity> fakeData = [
@@ -58,11 +56,11 @@ import 'models/tag_entity.dart';
 
 List<NoteEntity> fakeNotes = List.generate(
     30,
-    (index) => NoteEntity(id: 'id $index', title: 'title$index', tagsId: [
-          '$index', 'test'
-          // TagEntity('tag tag$index', color: 0xFF200000 + 0x60 * index),
-          // TagEntity('tag tag$index', 0xFF400000 + 0x60 * index),
-          // TagEntity('tag tag$index', 0xFF800000 + 0x60 * index)
+    (index) => NoteEntity(id: 'id $index', title: 'title$index', tags: [
+          // '$index', 'test'
+          TagEntity(name: 'tag$index', color: 0xFF200000 + 0x60 * index),
+          TagEntity(name: 'tag$index', color: 0xFF400000 + 0x60 * index),
+          TagEntity(name: 'tag$index', color: 0xFF800000 + 0x60 * index),
         ]));
 
 List<TagEntity> fakeTags = List.generate(

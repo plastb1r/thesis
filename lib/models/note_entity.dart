@@ -1,37 +1,40 @@
 import 'package:equatable/equatable.dart';
+import 'package:mobile_product_1/models/tag_entity.dart';
+import 'package:mobile_product_1/models/note_model.dart';
 import 'package:mobile_product_1/references/todos_app_core/src/uuid.dart';
 
 class NoteEntity extends Equatable {
   final String id;
   final String title;
   final String description;
-  final List<String> tagsId;
+  final List<TagEntity> tags;
 
   NoteEntity({
     String id,
     this.title = '',
     this.description = '',
-    this.tagsId = const [],
+    this.tags = const [],
   }) : this.id = id ?? Uuid().generateV4();
 
-  Map<String, Object> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'tagsId': tagsId,
-    };
-  }
+  NoteEntity.fromModel({NoteModel note, List<TagEntity> tags})
+      : this.id = note.id ?? Uuid().generateV4(),
+        this.title = note.title ?? '',
+        this.description = note.description ?? '',
+        this.tags = tags ?? const [];
 
-  static NoteEntity fromJson(Map<String, Object> json) {
-    return NoteEntity(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      tagsId: json['tagsId'] as List<String>,
+  NoteModel toModel() {
+    return NoteModel(
+      id: id,
+      title: title,
+      description: description,
+      tagsId: tags.map((tag) => tag.id).toList(),
+      tags: tags,
     );
   }
 
   @override
-  get props => [id, title, description, tagsId];
+  get props => [id, title, description, tags];
+
+  @override
+  bool get stringify => true;
 }

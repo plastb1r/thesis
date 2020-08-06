@@ -9,9 +9,9 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<NeuShape> tags = data.tagsId
-        .map((tag) =>
-            NeuShape.buttonDown(withRepaintBoundary: false, child: Text(tag)))
+    List<NeuShape> tags = data.tags
+        .map((tag) => NeuShape.buttonDown(
+            withRepaintBoundary: false, child: Text(tag.name)))
         .toList();
 
     return NeuShape.buttonDown(

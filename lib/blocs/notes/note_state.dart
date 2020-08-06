@@ -10,7 +10,7 @@ abstract class NoteState extends Equatable {
 class NotesLoadInProgress extends NoteState {}
 
 class NotesLoadSuccess extends NoteState {
-  final List<TaggedNote> notes;
+  final List<NoteEntity> notes;
 
   const NotesLoadSuccess([this.notes = const []]);
 

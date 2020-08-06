@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobile_product_1/services/repositories/core/basic_repository.dart';
-import 'package:mobile_product_1/models/tagged_note.dart';
+import 'package:mobile_product_1/models/note_entity.dart';
 
 part 'note_event.dart';
 part 'note_state.dart';
@@ -70,9 +70,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     }
   }
 
-  Future<void> _saveNotes(List<TaggedNote> notes) {
-    return noteRepository.save(
-      notes.map((note) => note.toEntity()).toList(),
-    );
+  Future<void> _saveNotes(List<NoteEntity> notes) {
+    return noteRepository.save(notes);
   }
 }

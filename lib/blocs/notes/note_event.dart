@@ -13,7 +13,7 @@ abstract class NoteEvent extends Equatable {
 class NotesRequested extends NoteEvent {}
 
 class NoteAdded extends NoteEvent {
-  final TaggedNote note;
+  final NoteEntity note;
 
   const NoteAdded(this.note);
 
@@ -22,7 +22,7 @@ class NoteAdded extends NoteEvent {
 }
 
 class NoteDeleted extends NoteEvent {
-  final TaggedNote note;
+  final NoteEntity note;
 
   const NoteDeleted(this.note);
 
@@ -31,7 +31,7 @@ class NoteDeleted extends NoteEvent {
 }
 
 class NoteUpdated extends NoteEvent {
-  final TaggedNote note;
+  final NoteEntity note;
 
   const NoteUpdated(this.note);
 

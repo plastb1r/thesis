@@ -1,14 +1,15 @@
 import 'dart:convert';
 
-import 'package:mobile_product_1/services/repositories/key_value_tag_repository.dart';
-import 'package:mobile_product_1/models/note_entity.dart';
 import 'package:mobile_product_1/models/tag_entity.dart';
-import 'package:mobile_product_1/models/tagged_note.dart';
+import 'package:mobile_product_1/services/repositories/key_value_tag_repository.dart';
+import 'package:mobile_product_1/models/note_model.dart';
+import 'package:mobile_product_1/models/tag_model.dart';
+import 'package:mobile_product_1/models/note_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/basic_repository.dart';
 
-class KeyValueNoteRepository implements BasicRepository<TaggedNote> {
+class KeyValueNoteRepository implements BasicRepository<NoteModel> {
   final String key;
   final SharedPreferences prefs;
   final JsonCodec codec;
@@ -18,37 +19,41 @@ class KeyValueNoteRepository implements BasicRepository<TaggedNote> {
       [this.codec = json]);
 
   @override
-  Future<List<TaggedNote>> load() async {
-    List<NoteEntity> noteEntities = await _loadNoteEntity();
-    List<TagEntity> tags = await tagRepository.load();
+  Future<List<NoteModel>> load() async {
+    final noteModels = await _loadNoteModel();
+    final tags = await tagRepository.load();
 
-    List<TaggedNote> taggedNotes = noteEntities.map((entity) {
-      List<TagEntity> requiredTags = _getTagsRequiredForEntity(entity, tags);
-      return TaggedNote.fromEntity(entity: entity, tags: requiredTags);
+    final taggedNotes = noteModels.map((note) {
+      List<TagEntity> requiredTags = _getTagsRequiredForEntity(note, tags);
+      return NoteEntity.fromModel(note: note, tags: requiredTags);
     }).toList();
 
     return taggedNotes;
   }
 
-  Future<List<NoteEntity>> _loadNoteEntity() async {
+  Future<List<NoteModel>> _loadNoteModel() async {
     return codec
         .decode(prefs.getString(key))['notes']
         .cast<Map<String, Object>>()
-        .map<NoteEntity>(NoteEntity.fromJson)
+        .map<NoteModel>(NoteModel.fromJson)
         .toList(growable: false);
   }
 
   List<TagEntity> _getTagsRequiredForEntity(
-      NoteEntity entity, List<TagEntity> tags) {
-    return tags.where((tag) => entity.tagsId.contains(tag.id)).toList();
+      NoteModel entity, List<TagEntity> tags) {
+    return tags
+        .where((tag) => entity.tagsId.contains(tag.id))
+        .map((tag) => TagEntity.fromModel(tag));
   }
 
   @override
-  Future<bool> save(List<TaggedNote> notes) {
+  Future<bool> save(List<NoteEntity> notes) {
     return prefs.setString(
       key,
       codec.encode({
-        'notes': notes.map((note) => note.toEntity().toJson()).toList(),
+        'notes': notes
+            .map((note) => NoteModel.fromEntity(entity: note).toJson())
+            .toList(),
       }),
     );
   }

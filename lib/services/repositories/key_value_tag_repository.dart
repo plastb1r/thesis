@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:mobile_product_1/models/note_entity.dart';
+import 'package:mobile_product_1/models/note_model.dart';
 import 'package:mobile_product_1/models/tag_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,7 @@ class KeyValueTagRepository implements BasicRepository<TagEntity> {
     return codec
         .decode(prefs.getString(key))['tags']
         .cast<Map<String, Object>>()
-        .map<NoteEntity>(NoteEntity.fromJson)
+        .map<NoteModel>((tag) => NoteModel.fromJson(tag).toEntity())
         .toList(growable: false);
   }
 
