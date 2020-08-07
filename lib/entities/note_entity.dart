@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:mobile_product_1/entities/tag_entity.dart';
 import 'package:mobile_product_1/services/models/note_model.dart';
-import 'package:mobile_product_1/references/todos_app_core/src/uuid.dart';
+import 'package:mobile_product_1/core/uuid.dart';
 
 class NoteEntity extends Equatable {
   final String id;

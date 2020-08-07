@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'inner_shadow_decoration.dart';
+import '../core/inner_shadow_decoration.dart';
 
 class NeuShape extends StatelessWidget {
   static const double _borderWidth = 1.0;

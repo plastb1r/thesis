@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:mobile_product_1/references/todos_app_core/src/uuid.dart';
+import 'package:mobile_product_1/core/uuid.dart';
 
 class TagEntity extends Equatable {
   final String id;
