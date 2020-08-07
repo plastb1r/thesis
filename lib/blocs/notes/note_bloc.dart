@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_product_1/entities/note_entity.dart';
 import 'package:mobile_product_1/services/repositories/core/basic_repository.dart';
-import 'package:mobile_product_1/models/note_entity.dart';
 
 part 'note_event.dart';
 part 'note_state.dart';

@@ -1,6 +1,5 @@
-import 'package:mobile_product_1/models/note_entity.dart';
-import 'package:mobile_product_1/models/tag_entity.dart';
-import 'package:mobile_product_1/models/tag_model.dart';
+import 'package:mobile_product_1/entities/note_entity.dart';
+import 'package:mobile_product_1/entities/tag_entity.dart';
 
 class NoteModel extends NoteEntity {
   final List<String> tagsId;

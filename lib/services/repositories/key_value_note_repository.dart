@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:mobile_product_1/models/tag_entity.dart';
+import 'package:mobile_product_1/entities/note_entity.dart';
+import 'package:mobile_product_1/entities/tag_entity.dart';
 import 'package:mobile_product_1/services/repositories/key_value_tag_repository.dart';
-import 'package:mobile_product_1/models/note_model.dart';
-import 'package:mobile_product_1/models/tag_model.dart';
-import 'package:mobile_product_1/models/note_entity.dart';
+import 'package:mobile_product_1/services/models/note_model.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/basic_repository.dart';

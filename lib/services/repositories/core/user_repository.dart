@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:mobile_product_1/models/user_entity.dart';
+import 'package:mobile_product_1/entities/user_entity.dart';
 
 abstract class UserRepository {
   Future<UserEntity> login();

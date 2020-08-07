@@ -1,5 +1,5 @@
-import 'package:mobile_product_1/models/note_entity.dart';
-import 'models/tag_entity.dart';
+import 'entities/note_entity.dart';
+import 'entities/tag_entity.dart';
 
 // final List<NoteEntity> fakeData = [
 //   NoteEntity(
