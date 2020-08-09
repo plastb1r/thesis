@@ -7,10 +7,6 @@ import 'package:mobile_product_1/screens/tag_edit.dart';
 const int background_color = 0xFFE9EDF0;
 
 void main() {
-  final list = const <int>[];
-  print(list.map((i) => i.isEven).toList());
-  print(list.map((i) => i.isEven).toList().length);
-
   debugProfilePaintsEnabled = true;
   //debugProfileBuildsEnabled = true;
   runApp(MyApp());
@@ -29,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(background_color),
       ),
       home: PageView(
-        children: [TagEdit(), NotesGrid(), CreateNote()],
+        children: [CreateNote()],
       ),
     );
   }

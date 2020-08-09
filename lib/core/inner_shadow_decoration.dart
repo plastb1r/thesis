@@ -79,21 +79,16 @@ class _ConcaveDecorationPainter extends BoxPainter {
 
     final paint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, depth);
-    final clipSize = rect.size.aspectRatio > 1
-        ? Size(rect.width, rect.height / 2)
-        : Size(rect.width / 2, rect.height);
-    for (final alignment in [Alignment.topLeft, Alignment.bottomRight]) {
-      final shaderRect =
-          alignment.inscribe(Size.square(rect.longestSide), rect);
-      paint
-        ..shader = ui.Gradient.linear(
-            shaderRect.topLeft, shaderRect.bottomRight, colors, stops);
 
-      canvas.save();
-      canvas.clipRect(alignment.inscribe(clipSize, rect));
-      canvas.drawPath(path, paint);
-      canvas.restore();
-    }
+    final shaderRect =
+        Alignment.bottomRight.inscribe(Size.square(rect.longestSide), rect);
+
+    paint
+      ..shader = ui.Gradient.linear(
+          shaderRect.topCenter, shaderRect.bottomRight, colors, stops);
+
+    canvas.save();
+    canvas.drawPath(path, paint);
     canvas.restore();
   }
 }
