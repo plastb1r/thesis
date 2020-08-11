@@ -6,6 +6,8 @@ import '../widgets/neu_shape.dart';
 class CreateNote extends StatelessWidget {
   const CreateNote({Key key}) : super(key: key);
 
+  int operator [](int index) => 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

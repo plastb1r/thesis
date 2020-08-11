@@ -7,6 +7,7 @@ typedef void NeuButtonClickListener();
 
 class NeuButton extends StatefulWidget {
   final EdgeInsets padding;
+  final double borderRadius;
   final NeuButtonClickListener onPressed;
   final Widget child;
 
@@ -14,6 +15,7 @@ class NeuButton extends StatefulWidget {
       {Key key,
       this.padding =
           const EdgeInsets.symmetric(horizontal: 28.0, vertical: 15.0),
+      this.borderRadius = 200,
       this.onPressed,
       this.child})
       : super(key: key);
@@ -34,14 +36,17 @@ class _NeuButtonState extends State<NeuButton> {
   void initState() {
     shapeUp = NeuShape.buttonUp(
       padding: widget.padding,
+      borderRadius: widget.borderRadius,
       child: widget.child,
     );
     shapeDown = NeuShape.buttonDown(
-      padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 15.0),
+      padding: widget.padding,
+      borderRadius: widget.borderRadius,
       child: widget.child,
     );
     shapeHold = NeuShape.buttonHold(
-      padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 15.0),
+      padding: widget.padding,
+      borderRadius: widget.borderRadius,
       child: widget.child,
     );
     nextState = ButtonState.up;
@@ -77,7 +82,7 @@ class _NeuButtonState extends State<NeuButton> {
         crossFadeState: nextState == ButtonState.hold
             ? CrossFadeState.showSecond
             : CrossFadeState.showFirst,
-        duration: const Duration(milliseconds: 150),
+        duration: const Duration(milliseconds: 200),
         firstChild: Padding(
           padding: const EdgeInsets.all(14),
           child: isSelected ? shapeDown : shapeUp,

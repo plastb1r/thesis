@@ -64,6 +64,4 @@ List<NoteEntity> fakeNotes = List.generate(
         ]));
 
 List<TagEntity> fakeTags = List.generate(
-    30,
-    (index) =>
-        TagEntity(name: 'tag tag$index', color: 0xFF200000 + 0x60 * index));
+    30, (index) => TagEntity(name: '$index', color: 0xFF6AE0B6 + 0xA0 * index));

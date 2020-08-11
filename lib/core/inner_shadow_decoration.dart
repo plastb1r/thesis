@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
@@ -66,10 +67,9 @@ class _ConcaveDecorationPainter extends BoxPainter {
       ui.Canvas canvas, ui.Offset offset, ImageConfiguration configuration) {
     final shapePath = shape.getOuterPath(offset & configuration.size);
     final rect = shapePath.getBounds();
-
-    final delta = 16 / rect.longestSide;
+    final delta = 32 / rect.longestSide;
     final stops = [0.5 - delta, 0.5 + delta];
-
+    depth = 5;
     final path = Path()
       ..fillType = PathFillType.evenOdd
       ..addRect(rect.inflate(depth * 2))
@@ -80,15 +80,28 @@ class _ConcaveDecorationPainter extends BoxPainter {
     final paint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, depth);
 
-    final shaderRect =
-        Alignment.bottomRight.inscribe(Size.square(rect.longestSide), rect);
+    List<Offset> offsets = getGradientOffsets(rect.size);
 
-    paint
-      ..shader = ui.Gradient.linear(
-          shaderRect.topCenter, shaderRect.bottomRight, colors, stops);
+    paint..shader = ui.Gradient.linear(offsets[0], offsets[1], colors, stops);
 
     canvas.save();
     canvas.drawPath(path, paint);
     canvas.restore();
+    canvas.restore();
+  }
+
+  List<Offset> getGradientOffsets(Size boxSize) {
+    final diagonal =
+        sqrt(boxSize.height * boxSize.height + boxSize.width * boxSize.width);
+
+    if (boxSize.aspectRatio > 1) {
+      final cosine = boxSize.width / diagonal;
+      final delta = diagonal / (2 * cosine);
+      return [Offset(boxSize.width - delta, 0), Offset(delta, boxSize.height)];
+    } else {
+      final cosine = boxSize.height / diagonal;
+      final delta = diagonal / (2 * cosine);
+      return [Offset(0, boxSize.height - delta), Offset(boxSize.width, delta)];
+    }
   }
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_product_1/core/constants.dart';
 import '../core/inner_shadow_decoration.dart';
 
 class NeuShape extends StatelessWidget {
-  static const double _borderWidth = 1.0;
-
   final EdgeInsets margin;
   final EdgeInsets padding;
   final double borderRadius;
@@ -11,8 +10,8 @@ class NeuShape extends StatelessWidget {
   final bool withRepaintBoundary;
 
   final double innerDepth;
-  final BoxShadow brightBoxShadow;
-  final BoxShadow darkBoxShadow;
+  final BoxShadow outherBrightShadow;
+  final BoxShadow outherDarkShadow;
   final List<Color> borderGradientColors;
   final List<Color> innerShadowColors;
 
@@ -22,23 +21,12 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = 200.0,
+    this.borderRadius = full_curvature_radius,
     this.withRepaintBoundary = true,
-    this.innerDepth = 0.0,
-    this.brightBoxShadow = const BoxShadow(
-      color: Color(0xFFFFFFFF),
-      blurRadius: 8.0,
-      offset: Offset(-4.0, -4.0),
-    ),
-    this.darkBoxShadow = const BoxShadow(
-      color: Color(0xFFA6B4C8),
-      blurRadius: 6.0,
-      offset: Offset(5.0, 5.0),
-    ),
-    this.borderGradientColors = const [
-      Color(0xFFFFFFFF),
-      Color(0xFFD4DBE4),
-    ],
+    this.innerDepth = neu_button_up_inner_depth,
+    this.outherBrightShadow = neu_bright_box_shadow,
+    this.outherDarkShadow = neu_dark_box_shadow,
+    this.borderGradientColors = neu_border_gradient_colors,
     this.innerShadowColors,
     this.child,
   }) : super(key: key);
@@ -47,19 +35,13 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = 200.0,
+    this.borderRadius = full_curvature_radius,
     this.withRepaintBoundary = true,
-    this.innerDepth = 7.0,
-    this.brightBoxShadow,
-    this.darkBoxShadow,
-    this.borderGradientColors = const [
-      Color(0xFFD4DBE4),
-      Color(0xFFFFFFFF),
-    ],
-    this.innerShadowColors = const [
-      Color(0xFFFFFFFF),
-      Color(0xFFA3B0C3),
-    ],
+    this.innerDepth = neu_button_down_inner_depth,
+    this.outherBrightShadow,
+    this.outherDarkShadow,
+    this.borderGradientColors = neu_border_gradient_colors,
+    this.innerShadowColors = neu_inner_shadow_colors,
     this.child,
   }) : super(key: key);
 
@@ -67,19 +49,13 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = 200.0,
+    this.borderRadius = full_curvature_radius,
     this.withRepaintBoundary = true,
-    this.innerDepth = 7.0,
-    this.brightBoxShadow,
-    this.darkBoxShadow,
-    this.borderGradientColors = const [
-      Color(0xFFD4DBE4),
-      Color(0xFFFFFFFF),
-    ],
-    this.innerShadowColors = const [
-      Color(0xFFFFFFFF),
-      Color(0xFF93A0B1),
-    ],
+    this.innerDepth = neu_button_hold_inner_depth,
+    this.outherBrightShadow,
+    this.outherDarkShadow,
+    this.borderGradientColors = neu_border_gradient_colors,
+    this.innerShadowColors = neu_inner_shadow_colors,
     this.child,
   }) : super(key: key);
 
@@ -93,12 +69,12 @@ class NeuShape extends StatelessWidget {
   Widget _build(BuildContext context) {
     return Container(
       margin: margin,
-      decoration: isAboveSurface()
+      decoration: !isBelowSurface()
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               boxShadow: [
-                brightBoxShadow,
-                darkBoxShadow,
+                outherBrightShadow,
+                outherDarkShadow,
               ],
               gradient: LinearGradient(
                 colors: borderGradientColors,
@@ -107,8 +83,9 @@ class NeuShape extends StatelessWidget {
               ),
             )
           : null,
+      //BoxDecoration(color: Color(0xFFE9EAEE)),
       child: Container(
-        margin: const EdgeInsets.all(NeuShape._borderWidth),
+        margin: const EdgeInsets.all(border_width),
         decoration: isBelowSurface()
             ? ConcaveDecoration(
                 shape: RoundedRectangleBorder(
@@ -135,7 +112,5 @@ class NeuShape extends StatelessWidget {
     );
   }
 
-  bool isBelowSurface() => innerShadowColors != null;
-
-  bool isAboveSurface() => brightBoxShadow != null && darkBoxShadow != null;
+  bool isBelowSurface() => innerDepth > 0;
 }
