@@ -67,9 +67,10 @@ class _ConcaveDecorationPainter extends BoxPainter {
       ui.Canvas canvas, ui.Offset offset, ImageConfiguration configuration) {
     final shapePath = shape.getOuterPath(offset & configuration.size);
     final rect = shapePath.getBounds();
+
     final delta = 32 / rect.longestSide;
     final stops = [0.5 - delta, 0.5 + delta];
-    depth = 5;
+
     final path = Path()
       ..fillType = PathFillType.evenOdd
       ..addRect(rect.inflate(depth * 2))

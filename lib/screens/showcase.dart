@@ -14,6 +14,7 @@ class ShowCase extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 30),
             Text("Buttons"),
             Wrap(
               children: [
@@ -21,33 +22,44 @@ class ShowCase extends StatelessWidget {
                     2,
                     (_) => NeuButton(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 70, vertical: 20),
+                              horizontal: 65, vertical: 20),
                         )),
                 ...List.generate(
                   2,
                   (_) => NeuButton(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 70, vertical: 70),
-                    borderRadius: 19,
+                        horizontal: 65, vertical: 65),
+                  ),
+                ),
+                ...List.generate(
+                  4,
+                  (_) => NeuButton(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 70),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Text("Chips"),
             Wrap(
                 children: List.generate(
                     8, (indx) => NeuChip(tagEntity: fakeTags[indx]))),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Text("Cards"),
-            Wrap(children: List.generate(8, (_) => NeuButton())),
-            SizedBox(height: 20),
+            Wrap(
+                children: List.generate(
+                    8,
+                    (_) => NeuButton(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 65, vertical: 20)))),
+            SizedBox(height: 30),
             Text("Inside Cards"),
             Wrap(children: List.generate(8, (_) => NeuButton())),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Text("Inactive"),
             Wrap(children: List.generate(8, (_) => NeuButton())),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
           ],
         ),
       ),

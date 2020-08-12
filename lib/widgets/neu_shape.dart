@@ -21,7 +21,7 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = full_curvature_radius,
+    this.borderRadius = button_border_radius,
     this.withRepaintBoundary = true,
     this.innerDepth = neu_button_up_inner_depth,
     this.outherBrightShadow = neu_bright_box_shadow,
@@ -35,7 +35,7 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = full_curvature_radius,
+    this.borderRadius = button_border_radius,
     this.withRepaintBoundary = true,
     this.innerDepth = neu_button_down_inner_depth,
     this.outherBrightShadow,
@@ -49,7 +49,7 @@ class NeuShape extends StatelessWidget {
     Key key,
     this.margin = const EdgeInsets.all(0.0),
     this.padding = const EdgeInsets.all(0.0),
-    this.borderRadius = full_curvature_radius,
+    this.borderRadius = button_border_radius,
     this.withRepaintBoundary = true,
     this.innerDepth = neu_button_hold_inner_depth,
     this.outherBrightShadow,
@@ -83,7 +83,6 @@ class NeuShape extends StatelessWidget {
               ),
             )
           : null,
-      //BoxDecoration(color: Color(0xFFE9EAEE)),
       child: Container(
         margin: const EdgeInsets.all(border_width),
         decoration: isBelowSurface()
@@ -99,14 +98,14 @@ class NeuShape extends StatelessWidget {
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 gradient: LinearGradient(
-                  colors: [Color(0xFFEEF0F5), Color(0xFFE6E9EF)],
+                  colors: neu_inner_gradient_colors,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
               ),
         child: Padding(
           padding: padding,
-          child: this.child ?? SizedBox(width: 0, height: 0),
+          child: this.child ?? SizedBox(width: 20.0, height: 10.0),
         ),
       ),
     );

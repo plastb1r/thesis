@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:mobile_product_1/core/constants.dart';
 import 'package:mobile_product_1/widgets/neu_shape.dart';
 
 enum ButtonState { up, down, hold }
@@ -13,9 +14,8 @@ class NeuButton extends StatefulWidget {
 
   const NeuButton(
       {Key key,
-      this.padding =
-          const EdgeInsets.symmetric(horizontal: 28.0, vertical: 15.0),
-      this.borderRadius = 200,
+      this.padding = const EdgeInsets.all(0.0),
+      this.borderRadius = button_border_radius,
       this.onPressed,
       this.child})
       : super(key: key);
@@ -82,13 +82,13 @@ class _NeuButtonState extends State<NeuButton> {
         crossFadeState: nextState == ButtonState.hold
             ? CrossFadeState.showSecond
             : CrossFadeState.showFirst,
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: neu_button_duration_ms),
         firstChild: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(neu_common_padding_for_shadows),
           child: isSelected ? shapeDown : shapeUp,
         ),
         secondChild: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(neu_common_padding_for_shadows),
           child: shapeHold,
         ),
       ),

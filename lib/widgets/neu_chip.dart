@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:mobile_product_1/core/constants.dart';
 import 'package:mobile_product_1/entities/tag_entity.dart';
 
 import 'neu_button.dart';
 
 class NeuChip extends StatelessWidget {
   final Key key;
-  final double _borderRadius = 200.0;
   final TagEntity tagEntity;
 
   NeuChip({Key key, @required this.tagEntity})
@@ -16,14 +16,18 @@ class NeuChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeuButton(
       key: key,
-      padding: EdgeInsets.symmetric(vertical: 37, horizontal: 8),
       child: Container(
-        margin: EdgeInsets.all(6),
+        margin: const EdgeInsets.all(neu_button_colored_field_padding),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(_borderRadius),
+          borderRadius: BorderRadius.circular(button_border_radius),
           color: Color(tagEntity.color),
         ),
-        child: Text(tagEntity.name),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: neu_button_text_padding_height,
+              vertical: neu_button_text_padding_width),
+          child: Text(tagEntity.name),
+        ),
       ),
     );
   }
