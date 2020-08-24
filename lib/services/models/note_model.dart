@@ -6,8 +6,8 @@ class NoteModel extends NoteEntity {
 
   NoteModel({
     String id,
-    String title = '',
-    String description = '',
+    String title,
+    String description,
     List<String> tagsId,
     List<TagEntity> tags = const [],
   })  : this.tagsId = tagsId ?? tags.map((tag) => tag.id).toList(),
@@ -27,30 +27,29 @@ class NoteModel extends NoteEntity {
           tags: entity.tags,
         );
 
+  NoteModel.fromJson(Map<String, Object> json)
+      : this(
+          id: json['id'] as String,
+          title: json['title'] as String,
+          description: json['description'] as String,
+          tagsId: json['tagsId'] as List<String>,
+        );
+
   NoteEntity toEntity() {
     return NoteEntity(
-      id: id,
-      title: title,
-      description: description,
-      tags: tags,
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      tags: this.tags,
     );
   }
 
   Map<String, Object> toJson() {
     return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'tagsId': tagsId,
+      'id': this.id,
+      'title': this.title,
+      'description': this.description,
+      'tagsId': this.tagsId,
     };
-  }
-
-  static NoteModel fromJson(Map<String, Object> json) {
-    return NoteModel(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      tagsId: json['tagsId'] as List<String>,
-    );
   }
 }

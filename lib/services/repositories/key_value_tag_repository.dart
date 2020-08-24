@@ -19,7 +19,7 @@ class KeyValueTagRepository implements BasicRepository<TagEntity> {
         .decode(prefs.getString(key))['tags']
         .cast<Map<String, Object>>()
         .map<NoteModel>((tag) => NoteModel.fromJson(tag).toEntity())
-        .toList(growable: false);
+        .toList();
   }
 
   @override
@@ -27,7 +27,7 @@ class KeyValueTagRepository implements BasicRepository<TagEntity> {
     return prefs.setString(
       key,
       codec.encode({
-        'tags': tags.map((tag) => tag.toJson()).toList(),
+        'tags': tags.map((tag) => tag.toModel().toJson()).toList(),
       }),
     );
   }

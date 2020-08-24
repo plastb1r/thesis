@@ -1,33 +1,40 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:mobile_product_1/core/uuid.dart';
+import 'package:mobile_product_1/entities/tag_entity.dart';
 
-class TagModel extends Equatable {
-  final String id;
-  final String name;
-  final int color;
+class TagModel extends TagEntity {
+  TagModel({id, @required String name, int color})
+      : super(id: id, name: name, color: color);
 
-  TagModel({id, @required this.name, this.color = 0x0})
-      : this.id = id ?? Uuid().generateV4();
+  TagModel.fromEntity({TagEntity entity})
+      : this(
+          id: entity.id,
+          name: entity.name,
+          color: entity.color,
+        );
+
+  TagModel.fromJson(Map<String, Object> json)
+      : this(
+          id: json['id'] as String,
+          name: json['name'] as String,
+          color: json['color'] as int,
+        );
+
+  TagEntity toEntity() {
+    return TagEntity(
+      id: id,
+      name: name,
+      color: color,
+    );
+  }
 
   Map<String, Object> toJson() {
     return {
-      'id': id,
-      'name': name,
-      'color': color,
+      'id': this.id,
+      'name': this.name,
+      'color': this.color,
     };
-  }
-
-  static TagModel fromJson(Map<String, Object> json) {
-    return TagModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      color: json['color'] as int,
-    );
   }
 
   @override
   get props => [id, name, color];
-
-  static fromModel(tag) {}
 }

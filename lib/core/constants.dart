@@ -14,8 +14,8 @@ const int neu_button_duration_ms = 200;
 const double neu_common_padding_for_shadows = 14.0;
 
 const double neu_button_colored_field_padding = 6.0;
-const double neu_button_text_padding_height = 4.0;
-const double neu_button_text_padding_width = 7.0;
+const double neu_button_text_padding_height = 6.0;
+const double neu_button_text_padding_width = 9.0;
 
 const BoxShadow neu_bright_box_shadow = BoxShadow(
   color: Color(0xFFFFFFFF),

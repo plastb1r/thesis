@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mobile_product_1/entities/tag_entity.dart';
 import 'package:mobile_product_1/services/models/note_model.dart';
 import 'package:mobile_product_1/core/uuid.dart';
+import 'package:mobile_product_1/services/models/tag_model.dart';
 
 class NoteEntity extends Equatable {
   final String id;
@@ -16,19 +17,18 @@ class NoteEntity extends Equatable {
     this.tags = const [],
   }) : this.id = id ?? Uuid().generateV4();
 
-  NoteEntity.fromModel({NoteModel note, List<TagEntity> tags})
-      : this.id = note.id ?? Uuid().generateV4(),
-        this.title = note.title ?? '',
-        this.description = note.description ?? '',
-        this.tags = tags ?? const [];
+  NoteEntity.fromModel({NoteModel model, List<TagModel> tags})
+      : this.id = model.id,
+        this.title = model.title,
+        this.description = model.description,
+        this.tags = tags;
 
   NoteModel toModel() {
     return NoteModel(
-      id: id,
-      title: title,
-      description: description,
-      tagsId: tags.map((tag) => tag.id).toList(),
-      tags: tags,
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      tagsId: this.tags.map((tag) => tag.id).toList(),
     );
   }
 
